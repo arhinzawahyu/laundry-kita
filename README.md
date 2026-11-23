@@ -79,10 +79,11 @@ Sumber kebenaran: `admin/assets/tokens.css` (nilai), `admin/assets/admin.css`
   jemput, dan desa jangkauan sebagai baris label–nilai bergaris rambut. Baris
   yang masih placeholder dilewati. Kolom data pindah ke bawah kartu di bawah
   900 px.
-- Sketsa tangan di kolom kanan: `acct_auth_doodle()` menggambar satu adegan
-  loket 340 x 275 (tali jemuran berisi kaos, handuk, kaus kaki, keranjang
-  cucian, mesin cuci depan, gelembung sabun) dengan garis bertingkat dan bidang
-  warna datar muda, tanpa gradasi. Semua garis ditarik sekali saat halaman
+- Sketsa tangan selebar lembar di atas dua kolom: `acct_auth_doodle()`
+  menggambar satu adegan 1080 x 320 (ruko laundry dengan kanopi dan jendela
+  berisi mesin cuci, jemuran berisi kaos, handuk, dan dua kaus kaki, meja
+  timbang gantung, keranjang cucian anyam, gelembung sabun) dengan garis
+  bertingkat dan bidang warna datar muda, tanpa gradasi. Semua garis ditarik sekali saat halaman
   dibuka (`pathLength` + `stroke-dashoffset`) lalu warnanya menyusul, kain
   bergoyang dari jepitannya, gelembung naik pelan, dan drum mesin berputar
   balik selama formulir dikirim (`body.is-washing`). Empat lipatan di keranjang

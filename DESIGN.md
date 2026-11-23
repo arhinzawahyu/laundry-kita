@@ -281,16 +281,20 @@ Halaman auth memakai satu ide: **satu lembar isian, satu kolom data loket**.
 - **Warna.** Kertas `--paper`, tinta `--ink`, satu aksen `--deep`. Galat memakai
   `#8F2614` di atas `#FCF3F1`. Teks sekunder 7,2:1 pada kertas, placeholder
   5:1 pada putih.
-- **Sketsa tangan.** `acct_auth_doodle()` menggambar satu adegan loket
-  340 × 275: tali jemuran berisi kaos, handuk, dan kaus kaki, keranjang cucian,
-  mesin cuci depan, dan gelembung sabun. Alasan: loket laundry memang berisi
-  benda itu, dan gambar tangan membuat halaman terasa dibuat orang, bukan
-  template. Ketebalan garis dibuat bertingkat seperti sketsa asli (badan mesin
-  2 px, kain 1,8 px, kerut dan tenunan 1,25 px), ujung dan sambungan bulat.
-  Tinta `--ink`, dua aksen saja: biru `#53629E` untuk kain dan kuning `#D9A227`
-  untuk gelembung serta tarikan kuas judul. Bidang kain dan badan mesin diisi
-  warna datar sangat muda (`#E3E7F4`, `#EBEEF8`, `#F6F7FC`) setelah garisnya
-  selesai ditarik, seperti mewarnai sketsa. Tanpa gradasi.
+- **Sketsa tangan.** `acct_auth_doodle()` menggambar satu adegan selebar
+  lembar (1080 x 320) di atas dua kolom: ruko laundry beratap limas dengan
+  kanopi bergerigi, pintu, dan jendela kaca berisi mesin cuci depan; jemuran
+  antara dua tiang berisi kaos, handuk, dan dua kaus kaki; meja timbang
+  gantung pada tiang kanan; keranjang cucian anyam. Alasan: loket laundry
+  memang berisi benda itu, dan gambar tangan membuat halaman terasa dibuat
+  orang, bukan template. Ketebalan garis bertingkat (badan 2,2 px, kain dan
+  jeruji 2,2 px, kerut dan tenunan 1,2–1,4 px), ujung dan sambungan bulat.
+  Tinta `--ink`, dua aksen: biru `#53629E` untuk kain dan kuning `#D9A227`
+  untuk gelembung serta tarikan kuas judul. Bidang kain, kanopi, dinding, dan
+  drum diisi warna datar sangat muda (`#E3E7F4`, `#EBEEF8`, `#EDEFF7`,
+  `#F6F7FC`) setelah garisnya selesai ditarik, seperti mewarnai sketsa. Tanpa
+  gradasi. Pita gambar memakai `grid-column: 1 / -1` sehingga selebar lembar
+  di desktop, dan turun ke atas kartu isian di bawah 900 px.
 - **Keranjang sebagai penanda isian.** Empat lipatan cucian di keranjang
   mewakili empat perempat isian wajib; `account.js` menambah `.is-filled` pada
   lipatan sesuai jumlah kolom yang sudah terisi. Alasan: memberi umpan balik
