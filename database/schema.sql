@@ -1,0 +1,137 @@
+-- GO Laundry CMS schema (MySQL 5.7+/MariaDB 10.3+)
+-- Dijalankan otomatis oleh config/db.php pada request pertama.
+
+CREATE TABLE IF NOT EXISTS admin_users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(80) NOT NULL,
+    email VARCHAR(190) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role ENUM('owner', 'editor') NOT NULL DEFAULT 'editor',
+    last_login_at DATETIME NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_admin_email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS settings (
+    k VARCHAR(64) NOT NULL PRIMARY KEY,
+    v LONGTEXT NULL,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS services (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    service_key VARCHAR(40) NOT NULL,
+    label VARCHAR(60) NOT NULL,
+    unit VARCHAR(20) NOT NULL DEFAULT 'kg',
+    price INT UNSIGNED NOT NULL DEFAULT 0,
+    min_qty DECIMAL(6,2) NOT NULL DEFAULT 1,
+    step DECIMAL(6,2) NOT NULL DEFAULT 0.5,
+    duration_hours SMALLINT UNSIGNED NOT NULL DEFAULT 48,
+    duration_label VARCHAR(40) NOT NULL DEFAULT '',
+    blurb VARCHAR(190) NOT NULL DEFAULT '',
+    detail VARCHAR(255) NOT NULL DEFAULT '',
+    active TINYINT(1) NOT NULL DEFAULT 1,
+    sort SMALLINT NOT NULL DEFAULT 0,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_service_key (service_key)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS areas (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(80) NOT NULL,
+    active TINYINT(1) NOT NULL DEFAULT 1,
+    sort SMALLINT NOT NULL DEFAULT 0,
+    UNIQUE KEY uq_area_name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS slots (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    label VARCHAR(60) NOT NULL,
+    active TINYINT(1) NOT NULL DEFAULT 1,
+    sort SMALLINT NOT NULL DEFAULT 0,
+    UNIQUE KEY uq_slot_label (label)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS hours (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    scope ENUM('outlet', 'courier') NOT NULL DEFAULT 'outlet',
+    day VARCHAR(60) NOT NULL,
+    time_label VARCHAR(80) NOT NULL,
+    sort SMALLINT NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS testimonials (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    service VARCHAR(40) NOT NULL DEFAULT '',
+    quote TEXT NOT NULL,
+    rating TINYINT UNSIGNED NULL,
+    active TINYINT(1) NOT NULL DEFAULT 1,
+    sort SMALLINT NOT NULL DEFAULT 0,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS guarantees (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(80) NOT NULL,
+    body VARCHAR(255) NOT NULL,
+    sort SMALLINT NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS customers (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(80) NOT NULL,
+    email VARCHAR(190) NOT NULL,
+    whatsapp VARCHAR(24) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    last_login_at DATETIME NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_customer_email (email),
+    KEY idx_customer_whatsapp (whatsapp)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS orders (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(24) NOT NULL,
+    customer_id INT UNSIGNED NULL,
+    name VARCHAR(80) NOT NULL,
+    whatsapp VARCHAR(24) NOT NULL,
+    desa VARCHAR(80) NOT NULL,
+    address VARCHAR(190) NOT NULL,
+    pickup_date DATE NOT NULL,
+    slot VARCHAR(60) NOT NULL,
+    service_key VARCHAR(40) NOT NULL,
+    weight DECIMAL(6,2) NULL,
+    notes VARCHAR(255) NULL,
+    status VARCHAR(24) NOT NULL DEFAULT 'baru',
+    estimate_total INT UNSIGNED NULL,
+    source VARCHAR(24) NOT NULL DEFAULT 'landing',
+    ip VARCHAR(45) NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_order_code (code),
+    KEY idx_order_status (status),
+    KEY idx_order_date (pickup_date),
+    KEY idx_order_created (created_at),
+    KEY idx_order_customer (customer_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS order_events (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    order_id INT UNSIGNED NOT NULL,
+    status VARCHAR(24) NOT NULL,
+    note VARCHAR(255) NULL,
+    admin_id INT UNSIGNED NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    KEY idx_event_order (order_id),
+    CONSTRAINT fk_event_order FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS admin_activity (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    admin_id INT UNSIGNED NULL,
+    action VARCHAR(60) NOT NULL,
+    detail VARCHAR(190) NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    KEY idx_activity_created (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

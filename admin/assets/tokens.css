@@ -1,0 +1,265 @@
+/* ============================================================================
+   GO Laundry CMS — Design tokens
+   Satu sumber nilai untuk seluruh dashboard. Tidak ada warna, ukuran huruf,
+   jarak, radius, atau bayangan yang ditulis langsung di komponen.
+   Urutan lapisan: palette mentah -> token semantik -> komponen.
+
+   Aturan pakai:
+   - Komponen hanya boleh memakai token semantik (--surface-*, --text-*, ...).
+   - Palette mentah (--deep-500, --paper-200) hanya dipakai di file ini.
+   - Nama token: --<peran>-<varian>. Kuning = peringatan, jingga = bahaya.
+   ========================================================================== */
+
+:root {
+    color-scheme: light;
+
+    /* ------------------------------------------------------- 01. palette */
+    /* Neutral hangat: kertas + tinta */
+    --ink-1000: #16111f;
+    --ink-900: #241e2e;
+    --ink-800: #3a3348;
+    --ink-700: #4e4759;
+    --ink-600: #6e6879;
+    --ink-500: #766f81;
+    --ink-400: #a8a1b0;
+
+    --paper-0: #ffffff;
+    --paper-50: #fcfbf7;
+    --paper-100: #faf8f3;
+    --paper-200: #f5f3ed;
+    --paper-300: #f3f0e9;
+    --paper-400: #efebe3;
+    --paper-500: #e5e0d7;
+    --paper-600: #d4cec2;
+    --paper-700: #bfb8a9;
+
+    /* Ungu tua: permukaan gelap, aksi utama, teks di atas tint */
+    --deep-950: #1f1730;
+    --deep-900: #241a38;
+    --deep-800: #2b2044;
+    --deep-700: #2e2149;
+    --deep-600: #3b2a5c;
+    --deep-500: #473472;
+    --deep-400: #5a4687;
+    --deep-300: #7a66a8;
+    --deep-200: #a08fc8;
+    --deep-100: #d9d1ec;
+
+    /* Indigo: fokus, tautan, grafik */
+    --base-600: #53629e;
+    --base-500: #6f7fb8;
+    --base-400: #8996c7;
+    --base-100: #e4e7f3;
+
+    /* Teal: aksen, sorotan aktif, tint */
+    --teal-700: #37626b;
+    --teal-500: #87bac3;
+    --teal-300: #a9d5d2;
+    --teal-100: #d6f4ed;
+    --teal-50: #eaf7f4;
+
+    /* --------------------------------------------------- 02. warna semantik */
+    /* Permukaan */
+    --surface: var(--paper-200);
+    --surface-card: var(--paper-0);
+    --surface-raised: var(--paper-50);
+    --surface-sunken: var(--paper-100);
+    --surface-quiet: var(--paper-300);
+    --surface-hover: var(--paper-100);
+    --surface-disabled: var(--paper-200);
+    --surface-input: var(--paper-0);
+    --surface-tint: var(--teal-50);
+    --surface-accent-soft: #e9f1f2;
+
+    /* Teks */
+    --text-strong: var(--ink-900);
+    --text: var(--ink-900);
+    --text-muted: var(--ink-600);
+    --text-faint: var(--ink-500);
+    --text-on-accent: var(--paper-0);
+    --text-on-deep: #f1eef7;
+    --text-on-deep-muted: rgba(241, 238, 247, 0.72);
+    --text-on-deep-faint: rgba(241, 238, 247, 0.56);
+
+    /* Garis */
+    --border: var(--paper-500);
+    --border-strong: var(--paper-600);
+    --border-soft: var(--paper-400);
+    --border-on-deep: rgba(255, 255, 255, 0.08);
+    --border-input: var(--paper-600);
+
+    /* Aksi utama */
+    --action-bg: var(--deep-500);
+    --action-bg-top: #5a4687;
+    --action-bg-bottom: #3f2d68;
+    --action-bg-hover: var(--deep-400);
+    --action-edge: var(--deep-700);
+    --action-danger-edge: #93352e;
+    --action-danger-shadow: #8d332c;
+    --action-text: var(--paper-0);
+
+    /* Fokus & ring */
+    --focus: var(--base-600);
+    --focus-ring: 0 0 0 3px rgba(83, 98, 158, 0.18);
+    --focus-ring-on-deep: 0 0 0 3px rgba(214, 244, 237, 0.28);
+    --focus-ring-danger: 0 0 0 3px rgba(176, 68, 59, 0.16);
+
+    /* Status: teks / latar / garis */
+    --ok-fg: #2c7a57;
+    --ok-bg: #e4f5ec;
+    --ok-border: #c4e7d5;
+    --warn-fg: #965f16;
+    --warn-bg: #fbf0de;
+    --warn-border: #eedcbb;
+    --danger-fg: #b0443b;
+    --danger-bg: #fbe9e6;
+    --danger-border: #f0d2cc;
+    --info-fg: #4c5f94;
+    --info-bg: #e9eef8;
+    --info-border: #d3ddee;
+
+    /* --------------------------------------------------- 03. tipografi */
+    --font-head: "Plus Jakarta Sans", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    /* Skala huruf (px) — 9 langkah, tidak ada nilai lain */
+    --fs-2xs: 10.5px;   /* label huruf besar, meta tabel */
+    --fs-xs: 11.5px;    /* keterangan, catatan */
+    --fs-sm: 12.5px;    /* teks tabel, tombol kecil */
+    --fs-md: 13.5px;    /* teks isi, input */
+    --fs-base: 14px;    /* paragraf utama */
+    --fs-lg: 16px;      /* judul kartu */
+    --fs-xl: 20px;      /* judul halaman kecil */
+    --fs-2xl: 26px;     /* judul halaman */
+    --fs-3xl: 34px;     /* judul auth / hero */
+
+    --lh-tight: 1.1;
+    --lh-snug: 1.25;
+    --lh-base: 1.55;
+    --lh-relaxed: 1.65;
+
+    --track-tight: -0.025em;
+    --track-normal: 0;
+    --track-wide: 0.08em;
+    --track-wider: 0.14em;
+
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-heavy: 800;
+
+    /* ------------------------------------------------------- 04. jarak */
+    --sp-0: 0;
+    --sp-1: 4px;
+    --sp-1-5: 6px;
+    --sp-2: 8px;
+    --sp-2-5: 10px;
+    --sp-3: 12px;
+    --sp-3-5: 14px;
+    --sp-4: 16px;
+    --sp-5: 20px;
+    --sp-6: 24px;
+    --sp-7: 28px;
+    --sp-8: 32px;
+    --sp-10: 40px;
+    --sp-12: 48px;
+    --sp-14: 56px;
+    --sp-16: 64px;
+
+    /* ------------------------------------------------------ 05. radius */
+    --r-xs: 6px;
+    --r-sm: 8px;
+    --r-md: 10px;
+    --r-lg: 14px;
+    --r-xl: 18px;
+    --r-pill: 999px;
+
+    /* ---------------------------------------------------- 06. bayangan */
+    --elev-0: none;
+    --elev-1: 0 1px 2px rgba(36, 30, 46, 0.06);
+    --elev-2: 0 1px 2px rgba(36, 30, 46, 0.04), 0 10px 22px -16px rgba(36, 30, 46, 0.35);
+    --elev-3: 0 1px 2px rgba(36, 30, 46, 0.05), 0 18px 36px -24px rgba(36, 30, 46, 0.42);
+    --elev-4: 0 30px 60px -20px rgba(36, 30, 46, 0.55);
+    --elev-edge: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+    --elev-action: 0 2px 0 var(--action-edge), 0 10px 18px -12px rgba(71, 52, 114, 0.85);
+    --elev-action-hover: 0 3px 0 var(--action-edge), 0 14px 22px -12px rgba(71, 52, 114, 0.9);
+
+    /* ------------------------------------------------------ 07. gerakan */
+    --dur-1: 120ms;   /* hover, warna */
+    --dur-2: 180ms;   /* tekan, buka-tutup kecil */
+    --dur-3: 260ms;   /* panel, dialog */
+    --dur-4: 420ms;   /* masuk halaman */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* ------------------------------------------------------ 08. kendali */
+    --ctl-sm: 32px;
+    --ctl-md: 40px;
+    --ctl-lg: 44px;
+    --ctl-input: 42px;
+    --pad-control-x: 16px;
+    --pad-control-x-sm: 11px;
+
+    /* ------------------------------------------------- 09. tata letak */
+    --sidebar-w: 268px;
+    --topbar-h: 64px;
+    --page-max: 1240px;
+    --page-pad-x: var(--sp-8);
+    --page-pad-y: var(--sp-6);
+    --auth-max: 420px;
+
+    /* ---------------------------------------------------- 10. z-index */
+    --z-base: 0;
+    --z-sticky: 30;
+    --z-drawer: 35;
+    --z-sidebar: 40;
+    --z-dialog: 60;
+    --z-toast: 80;
+    --z-skip: 100;
+    --z-route: 120;
+
+    /* ------------------------------------------ 11. permukaan gelap */
+    --deep-hero-gradient: linear-gradient(150deg, var(--deep-600) 0%, #2a1f42 100%);
+    --deep-surface-gradient:
+        radial-gradient(120% 60% at 0% 0%, rgba(135, 186, 195, 0.18), transparent 58%),
+        radial-gradient(90% 50% at 100% 100%, rgba(71, 52, 114, 0.85), transparent 60%),
+        linear-gradient(175deg, var(--deep-800) 0%, #221a36 100%);
+    --deep-hover: rgba(255, 255, 255, 0.06);
+    --deep-active-bg: var(--teal-100);
+    --deep-active-text: var(--deep-700);
+    --deep-chip: rgba(255, 255, 255, 0.055);
+
+    /* ---------------------------------------------------- 12. lapisan & efek */
+    --overlay-scrim: rgba(30, 23, 44, 0.45);
+    --surface-glass: rgba(245, 243, 237, 0.86);
+    --scrollbar-on-deep: rgba(255, 255, 255, 0.2);
+
+    --surface-hero-gradient:
+        radial-gradient(90% 120% at 100% 0%, rgba(135, 186, 195, 0.4), transparent 55%),
+        var(--deep-hero-gradient);
+    --surface-auth-gradient:
+        radial-gradient(90% 70% at 12% 10%, rgba(135, 186, 195, 0.28), transparent 55%),
+        radial-gradient(80% 60% at 90% 100%, rgba(83, 98, 158, 0.6), transparent 60%),
+        linear-gradient(160deg, var(--deep-700) 0%, var(--deep-950) 100%);
+
+    --on-hero-muted: rgba(255, 255, 255, 0.7);
+    --on-hero-faint: rgba(255, 255, 255, 0.62);
+    --hero-hairline: rgba(255, 255, 255, 0.1);
+
+    --deep-tint-15: rgba(214, 244, 237, 0.15);
+    --deep-tint-16: rgba(214, 244, 237, 0.16);
+    --deep-tint-10: rgba(214, 244, 237, 0.1);
+    --deep-tint-line: rgba(214, 244, 237, 0.35);
+    --deep-tint-line-soft: rgba(214, 244, 237, 0.25);
+
+    --ring-active-dot: 0 0 0 4px rgba(71, 52, 114, 0.12);
+    --ring-pulse-start: 0 0 0 0 rgba(71, 52, 114, 0.22);
+    --ring-pulse-end: 0 0 0 6px rgba(71, 52, 114, 0);
+
+    --shadow-brand-mark: 0 8px 18px -10px rgba(0, 0, 0, 0.7);
+    --shadow-drawer: 24px 0 60px -30px rgba(20, 14, 32, 0.7);
+    --filter-logo-on-deep: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.4));
+}

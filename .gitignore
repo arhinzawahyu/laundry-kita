@@ -1,0 +1,9 @@
+# Frame PNG adalah master lokal; yang dipakai situs versi WebP.
+# Ubah ulang dengan: tools/sequence-webp.sh
+sequence/*.png
+
+# Artefak lokal
+.DS_Store
+Thumbs.db
+*.log
+.shots/

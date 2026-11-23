@@ -1,0 +1,615 @@
+/* ============================================================================
+   Halaman masuk & daftar.
+   Arah: satu lembar isian di atas kertas polos, ditemani kolom data loket
+   yang benar benar dipakai pelanggan. Satu aksen ungu tua, garis rambut,
+   angka tabular, tanpa gradasi, tanpa bayangan besar, tanpa judul raksasa.
+   ========================================================================= */
+
+.auth-body {
+    --a-edge: rgba(71, 52, 114, 0.18);
+    --a-edge-soft: rgba(71, 52, 114, 0.11);
+    --a-quiet: rgba(71, 52, 114, 0.05);
+    --a-err: #8F2614;
+    --a-err-bg: #FCF3F1;
+    --a-err-edge: rgba(143, 38, 20, 0.34);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.auth-body main { flex: 1 0 auto; }
+
+.auth-wrap {
+    width: min(1080px, 100% - 40px);
+    margin-inline: auto;
+}
+@media (min-width: 768px) {
+    .auth-wrap { width: min(1080px, 100% - 64px); }
+}
+
+.auth-skip {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 60;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--deep-ink);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-200%);
+    transition: transform 300ms var(--ease);
+}
+.auth-skip:focus-visible { transform: translateY(0); }
+
+/* ------------------------------------------------------------ bar atas */
+
+.auth-top {
+    background: var(--paper);
+    border-bottom: 1px solid var(--a-edge-soft);
+}
+.auth-top__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 72px;
+}
+.auth-top__brand {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 8px;
+    text-decoration: none;
+}
+.auth-top__mark {
+    position: relative;
+    display: block;
+    width: 132px;
+    height: 46px;
+    overflow: hidden;
+}
+.auth-top__mark img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 196px;
+    height: 196px;
+    max-width: none;
+    transform: translate(-50%, -50%);
+}
+.auth-top__nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.auth-top__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 12px;
+    border-radius: 8px;
+    color: var(--ink-soft);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-decoration: none;
+    transition: background-color 300ms var(--ease), color 300ms var(--ease);
+}
+.auth-top__link:hover { background: var(--a-quiet); color: var(--deep); }
+.auth-top__link--strong { color: var(--deep); font-weight: 600; }
+.auth-top__sep {
+    width: 1px;
+    height: 20px;
+    background: var(--a-edge);
+}
+
+/* ------------------------------------------------------------- kerangka */
+
+.auth-main {
+    display: grid;
+    place-content: center;
+    padding-block: 64px 96px;
+}
+.auth-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 440px) minmax(0, 380px);
+    justify-content: space-between;
+    gap: 80px;
+    align-items: start;
+}
+@media (max-width: 980px) {
+    .auth-shell { gap: 56px; }
+}
+@media (max-width: 900px) {
+    .auth-main { padding-block: 40px 64px; }
+    .auth-shell {
+        grid-template-columns: minmax(0, 1fr);
+        justify-content: stretch;
+        gap: 48px;
+    }
+}
+
+.auth-pane { min-width: 0; }
+.auth-pane__title {
+    margin: 0;
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    text-wrap: balance;
+}
+.auth-pane__lead {
+    margin: 8px 0 0;
+    max-width: 42ch;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    text-wrap: pretty;
+}
+@media (min-width: 901px) {
+    .auth-pane__title { font-size: 36px; line-height: 40px; }
+}
+
+/* Coretan tangan di bawah judul: satu tarikan kuas kuning. */
+.auth-underline {
+    display: block;
+    width: 208px;
+    height: 10px;
+    margin: 8px 0 0;
+    color: #D9A227;
+    overflow: visible;
+}
+
+/* --------------------------------------------------------------- lembar */
+
+.auth-card {
+    margin-top: 32px;
+    padding: 32px 32px 24px;
+    background: var(--white);
+    border: 1px solid var(--a-edge-soft);
+    border-radius: 12px;
+}
+@media (max-width: 420px) {
+    .auth-card { margin-top: 24px; padding: 24px 20px 20px; }
+}
+
+.auth-form {
+    display: grid;
+    gap: 24px;
+    margin-top: 24px;
+}
+.auth-card .auth-form:first-child { margin-top: 0; }
+
+/* --------------------------------------------------------------- isian */
+
+.field { display: grid; gap: 8px; min-width: 0; }
+.field__label {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.field__label span { color: var(--ink-soft); font-weight: 400; }
+
+.field input {
+    width: 100%;
+    min-height: 48px;
+    padding: 11px 12px;
+    border: 1px solid rgba(71, 52, 114, 0.26);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    transition: border-color 300ms var(--ease), background-color 300ms var(--ease), box-shadow 300ms var(--ease);
+}
+.field input::placeholder { color: #726B85; opacity: 1; }
+.field input:hover { border-color: rgba(71, 52, 114, 0.44); }
+.field input:focus,
+.field input:focus-visible {
+    outline: none;
+    border-color: var(--deep);
+    box-shadow: 0 0 0 3px rgba(71, 52, 114, 0.16);
+}
+
+.field__hint {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--ink-soft);
+}
+.field__err {
+    display: none;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    color: var(--a-err);
+}
+.field__err:not(:empty) { display: block; }
+.field.has-error input {
+    border-color: var(--a-err-edge);
+    background: var(--a-err-bg);
+}
+.field.has-error input:focus,
+.field.has-error input:focus-visible {
+    box-shadow: 0 0 0 3px rgba(143, 38, 20, 0.14);
+}
+
+/* kolom kata sandi dengan tombol tampilkan */
+
+.acct-field__wrap { position: relative; }
+.acct-field__wrap input { padding-right: 104px; }
+.acct-field__reveal {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    min-height: 40px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--deep);
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 300ms var(--ease), color 300ms var(--ease);
+}
+.acct-field__reveal:hover { background: var(--a-quiet); }
+.acct-field__reveal:active { background: rgba(71, 52, 114, 0.1); }
+.acct-field__reveal:focus-visible {
+    outline: 2px solid var(--deep);
+    outline-offset: 1px;
+}
+
+/* ------------------------------------------------------------- peringatan */
+
+.acct-alert {
+    margin-top: 24px;
+    padding: 12px;
+    border: 1px solid var(--a-edge);
+    border-radius: 8px;
+    background: var(--a-quiet);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 20px;
+}
+.acct-alert--error {
+    border-color: var(--a-err-edge);
+    background: var(--a-err-bg);
+    color: var(--a-err);
+}
+.acct-alert--success {
+    border-color: rgba(30, 106, 68, 0.32);
+    background: #EDF6F1;
+    color: #1E6A44;
+}
+
+/* ------------------------------------------------------------- syarat sandi */
+
+.acct-checks {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 12px;
+    border: 1px solid var(--a-edge-soft);
+    border-radius: 8px;
+    background: #FBFCFB;
+    color: var(--ink-soft);
+    font-size: 12px;
+    line-height: 16px;
+}
+.acct-checks__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.acct-checks__box {
+    position: relative;
+    flex: none;
+    width: 14px;
+    height: 14px;
+    border: 1px solid rgba(71, 52, 114, 0.34);
+    border-radius: 4px;
+    background: var(--white);
+    transition: background-color 300ms var(--ease), border-color 300ms var(--ease);
+}
+.acct-checks__item.is-ok { color: var(--ink); }
+.acct-checks__item.is-ok .acct-checks__box {
+    border-color: var(--deep);
+    background: var(--deep);
+}
+.acct-checks__item.is-ok .acct-checks__box::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border-right: 2px solid var(--white);
+    border-bottom: 2px solid var(--white);
+    transform: rotate(40deg);
+}
+
+.acct-match {
+    margin: 0;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    color: var(--a-err);
+}
+.acct-match.is-ok { color: #1E6A44; }
+
+/* ---------------------------------------------------------------- tombol */
+
+.acct-submit {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 8px;
+    padding: 11px 12px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--deep);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 300ms var(--ease), transform 300ms var(--ease), opacity 300ms var(--ease);
+}
+.acct-submit:hover { background: #3A2A5E; }
+.acct-submit:active { transform: translateY(1px); }
+.acct-submit:focus-visible {
+    outline: 3px solid var(--deep);
+    outline-offset: 2px;
+}
+.acct-submit[aria-disabled="true"],
+.acct-submit.is-busy {
+    opacity: 0.72;
+    cursor: progress;
+}
+
+/* --------------------------------------------------------------- tautan */
+
+.auth-switch {
+    margin: 16px 0 0;
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 20px;
+}
+.auth-switch a {
+    color: var(--deep);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 300ms var(--ease);
+}
+.auth-switch a:hover { color: #3A2A5E; }
+
+.auth-note {
+    margin: 16px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--a-edge-soft);
+    color: var(--ink-soft);
+    font-size: 12px;
+    line-height: 16px;
+    text-wrap: pretty;
+}
+
+/* ----------------------------------------------------------- kolom loket */
+
+.auth-facts { min-width: 0; }
+
+.auth-doodle {
+    max-width: 340px;
+    margin: 0 0 24px;
+    color: var(--ink);
+}
+.auth-doodle svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* Garis sketsa ditarik sekali saat halaman dibuka, bukan berdenyut. */
+.auth-doodle [data-draw],
+.auth-underline [data-draw] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: doodleDraw 920ms var(--ease) forwards;
+    animation-delay: var(--d, 0ms);
+}
+
+/* Kaos dan kaus kaki bergoyang dari jepitannya. */
+.auth-sway {
+    transform-box: fill-box;
+    transform-origin: 50% 0;
+    animation: doodleSway 6.4s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+.auth-sway--late { animation-delay: -2.4s; }
+
+.auth-bubble {
+    transform-box: fill-box;
+    animation: doodleBubble 9s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: var(--o, 0s);
+}
+
+/* Drum mesin berputar balik selama formulir dikirim. */
+.auth-drum {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+}
+.auth-body.is-washing .auth-drum {
+    animation: doodleAgitate 1.1s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@keyframes doodleDraw { to { stroke-dashoffset: 0; } }
+@keyframes doodleSway {
+    from { transform: rotate(-1.7deg); }
+    to   { transform: rotate(1.7deg); }
+}
+@keyframes doodleBubble {
+    0%   { opacity: 0; transform: translateY(12px); }
+    18%  { opacity: 0.9; }
+    70%  { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(-44px); }
+}
+@keyframes doodleAgitate {
+    from { transform: rotate(-16deg); }
+    to   { transform: rotate(16deg); }
+}.auth-facts__title {
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    color: var(--ink);
+}
+.auth-facts__lead {
+    margin: 4px 0 0;
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 20px;
+    text-wrap: pretty;
+}
+.auth-facts__list {
+    display: grid;
+    margin: 24px 0 0;
+    border-top: 1px solid var(--a-edge-soft);
+}
+.auth-fact {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 16px;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--a-edge-soft);
+}
+.auth-fact dt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-soft);
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+}
+.auth-fact__icon {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    color: var(--ink-soft);
+}
+.auth-fact dd {
+    margin: 0;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    text-wrap: pretty;
+}
+.auth-fact dd span {
+    color: var(--ink-soft);
+    font-weight: 400;
+}
+@media (max-width: 520px) {
+    .auth-fact {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 4px;
+    }
+}
+.auth-facts__note {
+    margin: 16px 0 0;
+    color: var(--ink-soft);
+    font-size: 12px;
+    line-height: 16px;
+    text-wrap: pretty;
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.auth-foot {
+    border-top: 1px solid var(--a-edge-soft);
+    padding-block: 24px;
+}
+.auth-foot__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 24px;
+    color: var(--ink-soft);
+    font-size: 12px;
+    line-height: 16px;
+}
+.auth-foot__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+}
+.auth-foot a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 300ms var(--ease);
+}
+.auth-foot a:hover { color: var(--deep); }
+
+/* --------------------------------------------------------------- gerak */
+
+.auth-pane,
+.auth-facts {
+    animation: authRise 500ms var(--ease) both;
+}
+.auth-facts { animation-delay: 60ms; }
+
+@keyframes authRise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-pane,
+    .auth-facts { animation: none; }
+    .auth-body *,
+    .auth-body *::before,
+    .auth-body *::after { transition-duration: 1ms !important; }
+
+    /* Sketsa langsung tampil utuh, tanpa goyang dan tanpa gelembung. */
+    .auth-doodle [data-draw],
+    .auth-underline [data-draw] {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+    .auth-sway,
+    .auth-bubble,
+    .auth-body.is-washing .auth-drum { animation: none; }
+    .auth-bubble { opacity: 0.75; }
+}
+
+/* Layar sempit: lembar lebih dulu, data loket menyusul. */
+@media (max-width: 900px) {
+    .auth-top__inner { min-height: 64px; }
+    .auth-top__mark { width: 108px; height: 38px; }
+    .auth-top__mark img { width: 164px; height: 164px; }
+}
+@media (max-width: 520px) {
+    .auth-top__nav .auth-top__sep { display: none; }
+    .auth-top__link { padding: 0 8px; }
+    .auth-pane__title { font-size: 24px; line-height: 32px; }
+}
