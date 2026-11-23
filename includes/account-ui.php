@@ -169,51 +169,93 @@ function acct_auth_page_end(array $siteConfig): void
 }
 
 /**
- * Sketsa tangan: tali jemuran, kaos, kaus kaki, dan mesin cuci. Garisnya
- * digambar sekali saat halaman dibuka, kaos dan kaus kaki bergoyang pelan,
- * gelembung naik, dan drum mesin berputar saat formulir dikirim.
+ * Adegan loket dalam satu sketsa: tali jemuran berisi kaos, handuk, dan kaus
+ * kaki, keranjang cucian, mesin cuci, dan gelembung sabun. Garisnya ditarik
+ * sekali saat halaman dibuka. Keranjang dipakai sebagai penanda isian: tiap
+ * lipatan cucian muncul saat satu kolom formulir terisi (lihat account.js).
  */
 function acct_auth_doodle(): void
 {
     ?>
 <div class="auth-doodle">
-    <svg viewBox="0 0 320 200" role="presentation" focusable="false" aria-hidden="true">
-        <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-            <path data-draw pathLength="1" style="--d:0ms" d="M8 43 C 78 58, 148 58, 220 45 C 258 38, 288 39, 312 44" />
+    <svg viewBox="0 0 340 275" role="presentation" focusable="false" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path data-draw pathLength="1" style="--d:0ms" d="M6 42 C 72 58, 142 60, 208 48 C 256 39, 302 38, 334 45" />
 
             <g class="auth-sway" stroke="#53629E" stroke-opacity=".9">
-                <path data-draw pathLength="1" style="--d:180ms" stroke="currentColor" stroke-opacity=".8" d="M84 33 L 86.5 51" />
-                <path data-draw pathLength="1" style="--d:220ms" stroke="currentColor" stroke-opacity=".8" d="M91 32 L 88 51" />
-                <path data-draw pathLength="1" style="--d:300ms" d="M66 57 L 55 77 L 68 83 L 68 123 C 78 130, 95 130, 105 123 L 105 83 L 118 77 L 107 57 L 96 53 C 90 61, 82 61, 76 53 Z" />
-                <path data-draw pathLength="1" style="--d:520ms" d="M76 53 C 82 62, 90 62, 96 53" />
-                <path data-draw pathLength="1" style="--d:640ms" stroke-opacity=".35" d="M68 113 L 105 113" />
+                <path data-draw pathLength="1" style="--d:140ms" stroke="currentColor" stroke-opacity=".8" d="M84 36 L86 54" />
+                <path data-draw pathLength="1" style="--d:170ms" stroke="currentColor" stroke-opacity=".8" d="M91 35 L89 54" />
+                <path data-draw pathLength="1" style="--d:260ms" class="auth-fill" fill="#E3E7F4" fill-opacity="0" d="M66 60 L54 82 L68 88 L68 136 C 78 144, 96 144, 106 136 L106 88 L120 82 L108 60 L96 56 C 90 65, 82 65, 76 56 Z" />
+                <path data-draw pathLength="1" style="--d:460ms" d="M76 56 C 82 66, 90 66, 96 56" />
+                <path data-draw pathLength="1" style="--d:540ms" stroke-width="1.25" stroke-opacity=".3" d="M68 126 L106 126" />
             </g>
 
             <g class="auth-sway auth-sway--late" stroke="#53629E" stroke-opacity=".9">
-                <path data-draw pathLength="1" style="--d:240ms" stroke="currentColor" stroke-opacity=".8" d="M213 33 L 214.5 51" />
-                <path data-draw pathLength="1" style="--d:280ms" stroke="currentColor" stroke-opacity=".8" d="M219 32 L 217 51" />
-                <path data-draw pathLength="1" style="--d:420ms" d="M212 53 C 214 64, 211 72, 213 84 C 215 98, 212 108, 220 116 C 229 124, 240 120, 241 109 C 242 98, 232 96, 228 86 C 224 76, 226 64, 225 53 Z" />
-                <path data-draw pathLength="1" style="--d:700ms" stroke-opacity=".4" d="M213 61 L 224 58" />
-                <path data-draw pathLength="1" style="--d:740ms" stroke-opacity=".4" d="M214 71 L 226 68" />
+                <path data-draw pathLength="1" style="--d:160ms" stroke="currentColor" stroke-opacity=".8" d="M170 36 L171 54" />
+                <path data-draw pathLength="1" style="--d:190ms" stroke="currentColor" stroke-opacity=".8" d="M177 35 L175 54" />
+                <path data-draw pathLength="1" style="--d:300ms" class="auth-fill" fill="#EBEEF8" fill-opacity="0" d="M160 58 C 158 86, 158 112, 160 132 C 168 138, 184 138, 190 132 C 192 110, 192 84, 190 58 C 180 54, 170 54, 160 58 Z" />
+                <path data-draw pathLength="1" style="--d:580ms" stroke-width="1.25" stroke-opacity=".3" d="M182 62 C 181 80, 182 96, 183 112" />
+                <path data-draw pathLength="1" style="--d:560ms" stroke-opacity=".4" d="M160 98 C 170 101, 182 101, 190 98" />
+                <path data-draw pathLength="1" style="--d:600ms" stroke-opacity=".4" d="M160 114 C 170 117, 182 117, 190 114" />
             </g>
 
-            <g stroke-opacity=".75">
-                <path data-draw pathLength="1" style="--d:120ms" d="M14 132 C 46 130, 72 132, 78 138 C 84 144, 83 186, 76 192 C 68 197, 20 197, 12 192 C 5 187, 5 141, 14 132 Z" />
-                <path data-draw pathLength="1" style="--d:560ms" d="M31 148 L 55 148" />
-                <g class="auth-drum">
-                    <path data-draw pathLength="1" style="--d:600ms" d="M45 152 C 62 152, 70 160, 70 170 C 70 180, 59 188, 45 188 C 31 188, 21 180, 21 170 C 21 160, 29 152, 45 152 Z" />
-                    <path data-draw pathLength="1" style="--d:760ms" stroke-opacity=".45" d="M45 160 L 45 180" />
-                    <path data-draw pathLength="1" style="--d:780ms" stroke-opacity=".45" d="M36 165 L 54 175" />
-                    <path data-draw pathLength="1" style="--d:800ms" stroke-opacity=".45" d="M54 165 L 36 175" />
+            <g class="auth-sway" stroke="#53629E" stroke-opacity=".9">
+                <path data-draw pathLength="1" style="--d:180ms" stroke="currentColor" stroke-opacity=".8" d="M248 36 L249 54" />
+                <path data-draw pathLength="1" style="--d:210ms" stroke="currentColor" stroke-opacity=".8" d="M255 35 L253 54" />
+                <path data-draw pathLength="1" style="--d:340ms" class="auth-fill" fill="#E3E7F4" fill-opacity="0" d="M248 56 C 250 68, 247 76, 249 90 C 251 102, 248 110, 256 118 C 265 126, 276 122, 277 111 C 278 100, 268 98, 264 88 C 260 78, 262 66, 261 56 Z" />
+                <path data-draw pathLength="1" style="--d:640ms" stroke-width="1.25" stroke-opacity=".3" d="M253 84 C 259 92, 259 100, 255 108" />
+                <path data-draw pathLength="1" style="--d:620ms" stroke-opacity=".4" d="M250 65 L259 63" />
+                <path data-draw pathLength="1" style="--d:650ms" stroke-opacity=".4" d="M250 75 L260 73" />
+            </g>
+
+            <g stroke-opacity=".8">
+                <path data-draw pathLength="1" style="--d:720ms" class="auth-fill" fill="#E3E7F4" fill-opacity="0" d="M24 192 C 58 190, 96 190, 126 193 C 130 194, 131 197, 130 201 L 122 250 C 121 256, 117 258, 112 258 L 38 258 C 33 258, 29 256, 28 250 L 20 201 C 19 197, 20 192, 24 192 Z" />
+                <path data-draw pathLength="1" style="--d:820ms" stroke-width="1.25" stroke-opacity=".3" d="M26 218 C 58 216, 96 216, 127 219" />
+                <path data-draw pathLength="1" style="--d:850ms" stroke-width="1.25" stroke-opacity=".3" d="M29 238 C 58 236, 96 236, 124 239" />
+
+                <g class="auth-load" stroke="#53629E">
+                    <g class="auth-item" data-step="1">
+                        <path d="M32 192 L32 180 C 32 177, 34 175, 38 175 L64 175 C 68 175, 70 177, 70 180 L70 192" />
+                        <path style="stroke-opacity:.35" d="M36 185 L66 185" />
+                    </g>
+                    <g class="auth-item" data-step="2">
+                        <path d="M74 192 L74 178 C 74 175, 76 173, 80 173 L104 173 C 108 173, 110 175, 110 178 L110 192" />
+                        <path style="stroke-opacity:.35" d="M78 183 L106 183" />
+                    </g>
+                    <g class="auth-item" data-step="3">
+                        <path d="M40 175 L40 163 C 40 160, 42 158, 46 158 L70 158 C 74 158, 76 160, 76 163 L76 175" />
+                        <path style="stroke-opacity:.35" d="M44 167 L72 167" />
+                    </g>
+                    <g class="auth-item" data-step="4">
+                        <path d="M80 173 L80 160 C 80 157, 82 155, 86 155 L108 155 C 112 155, 114 157, 114 160 L114 173" />
+                        <path style="stroke-opacity:.35" d="M84 164 L110 164" />
+                    </g>
                 </g>
-                <path data-draw pathLength="1" style="--d:700ms" d="M64 138 C 66 136, 68 138, 66 140" stroke-opacity=".5" />
+                <path data-draw pathLength="1" style="--d:880ms" stroke-width="2" d="M20 198 C 58 195, 96 195, 129 202" />
+            </g>
+
+            <g stroke-opacity=".8">
+                <path data-draw pathLength="1" style="--d:900ms" stroke-width="2" class="auth-fill" fill="#F6F7FC" fill-opacity="0" d="M216 156 C 250 153, 296 153, 314 158 C 320 160, 322 165, 322 173 L322 246 C 322 254, 318 258, 310 258 L222 258 C 214 258, 208 254, 208 246 L208 173 C 208 165, 210 158, 216 156 Z" />
+                <path data-draw pathLength="1" style="--d:1000ms" stroke-width="1.3" d="M209 172 C 250 170, 292 170, 321 172" />
+                <path data-draw pathLength="1" style="--d:1020ms" stroke-width="1.2" d="M221 160 L 246 159 C 248.5 159, 250 160.5, 250 163 L 250 168 M 222 164 L 249 163" />
+                <path data-draw pathLength="1" style="--d:1060ms" d="M303 178 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0" />
+                <path data-draw pathLength="1" style="--d:1070ms" stroke-width="1.3" stroke-opacity=".55" d="M264 181 C 284 181, 298 196, 298 216 C 298 236, 284 251, 264 251 C 244 251, 230 236, 230 216 C 230 196, 244 181, 264 181 Z" />
+                <path data-draw pathLength="1" style="--d:1100ms" stroke-width="1.3" stroke-opacity=".6" d="M221 258 L 219 263 M 226 258 L 228 263 M 304 258 L 302 263 M 309 258 L 311 263" />
+                <path data-draw pathLength="1"  />
+                <g class="auth-drum">
+                    <path data-draw pathLength="1" style="--d:1080ms" class="auth-fill" fill="#E3E7F4" fill-opacity="0" d="M264 189 C 279 189, 291 201, 291 216 C 291 231, 279 243, 264 243 C 249 243, 237 231, 237 216 C 237 201, 249 189, 264 189 Z" />
+                    <path data-draw pathLength="1" style="--d:1140ms" stroke-opacity=".38" d="M249 216 C 251 210, 258 208, 261 212 C 264 216, 261 221, 256 221 C 251 221, 247 220, 249 216 Z" />
+                    <path data-draw pathLength="1" style="--d:1160ms" stroke-opacity=".38" d="M270 224 C 272 219, 278 218, 280 222 C 282 226, 278 229, 274 228 C 271 227, 269 227, 270 224 Z" />
+                    
+                </g>
             </g>
 
             <g class="auth-bubbles" stroke="#D9A227">
-                <circle class="auth-bubble" style="--o:0s" cx="196" cy="150" r="5.5" />
-                <circle class="auth-bubble" style="--o:2.4s" cx="216" cy="126" r="3.6" />
-                <circle class="auth-bubble" style="--o:4.6s" cx="232" cy="158" r="2.6" />
-                <circle class="auth-bubble" style="--o:6.2s" cx="248" cy="116" r="4.2" />
+                <circle class="auth-bubble" style="--o:0s" cx="186" cy="152" r="6" />
+                <circle class="auth-bubble" style="--o:2.2s" cx="170" cy="126" r="4" />
+                <circle class="auth-bubble" style="--o:4.4s" cx="196" cy="106" r="2.8" />
+                <circle class="auth-bubble" style="--o:3.1s" cx="158" cy="168" r="3.4" />
+                <circle class="auth-bubble" style="--o:5.8s" cx="206" cy="134" r="3" />
             </g>
         </g>
     </svg>
@@ -432,11 +474,11 @@ function acct_status_pill(string $status): string
 function acct_date(?string $value, string $format = 'd M Y'): string
 {
     if ($value === null || $value === '') {
-        return '—';
+        return '–';
     }
     $time = strtotime($value);
     if ($time === false) {
-        return '—';
+        return '–';
     }
     $months = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
     $out = date($format, $time);

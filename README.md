@@ -79,13 +79,16 @@ Sumber kebenaran: `admin/assets/tokens.css` (nilai), `admin/assets/admin.css`
   jemput, dan desa jangkauan sebagai baris label–nilai bergaris rambut. Baris
   yang masih placeholder dilewati. Kolom data pindah ke bawah kartu di bawah
   900 px.
-- Sketsa tangan di kolom kanan: `acct_auth_doodle()` menggambar tali jemuran,
-  kaos, kaus kaki, dan mesin cuci sebagai SVG garis. Semua garis ditarik sekali
-  saat halaman dibuka (`pathLength` + `stroke-dashoffset`), kaos dan kaus kaki
-  bergoyang dari jepitannya, gelembung naik pelan, dan drum mesin berputar balik
-  selama formulir dikirim (`body.is-washing`). Satu tarikan kuas kuning di bawah
-  judul dari `acct_auth_underline()`. Semua gerak berhenti di
-  `prefers-reduced-motion: reduce`.
+- Sketsa tangan di kolom kanan: `acct_auth_doodle()` menggambar satu adegan
+  loket 340 x 275 (tali jemuran berisi kaos, handuk, kaus kaki, keranjang
+  cucian, mesin cuci depan, gelembung sabun) dengan garis bertingkat dan bidang
+  warna datar muda, tanpa gradasi. Semua garis ditarik sekali saat halaman
+  dibuka (`pathLength` + `stroke-dashoffset`) lalu warnanya menyusul, kain
+  bergoyang dari jepitannya, gelembung naik pelan, dan drum mesin berputar
+  balik selama formulir dikirim (`body.is-washing`). Empat lipatan di keranjang
+  menyala sesuai jumlah kolom yang sudah terisi. Satu tarikan kuas kuning di
+  bawah judul dari `acct_auth_underline()`. Semua gerak berhenti di
+  `prefers-reduced-motion: reduce` dan sketsa langsung tampil utuh.
 - Tidak ada tiket animasi, judul display raksasa, atau panggung gelap lagi:
   `assets/js/auth.js` (tiket + jam WIB) dihapus, halaman hanya memakai
   `assets/js/account.js` untuk tampilkan sandi, syarat sandi, dan kunci kirim.

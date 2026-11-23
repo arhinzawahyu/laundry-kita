@@ -281,19 +281,38 @@ Halaman auth memakai satu ide: **satu lembar isian, satu kolom data loket**.
 - **Warna.** Kertas `--paper`, tinta `--ink`, satu aksen `--deep`. Galat memakai
   `#8F2614` di atas `#FCF3F1`. Teks sekunder 7,2:1 pada kertas, placeholder
   5:1 pada putih.
-- **Sketsa tangan.** `acct_auth_doodle()` = tali jemuran, kaos, kaus kaki, dan
-  mesin cuci dalam SVG garis 1,7 px berujung bulat (`var(--ink)`, aksen
-  `#53629E` dan `#D9A227`). Garis ditarik sekali lewat `pathLength="1"` +
-  `stroke-dashoffset`, kaos dan kaus kaki bergoyang ±1,7° dari jepitan
-  (6,4 detik, `cubic-bezier(0.45, 0, 0.55, 1)`), gelembung naik 44 px selama
-  9 detik, dan `.auth-drum` bergerak bolak balik saat `body.is-washing`
-  (dipasang `account.js` ketika formulir dikirim). Ikon baris data
-  (`acct_fact_icon()`) memakai gaya garis yang sama, 16 px. Judul diberi satu
-  tarikan kuas kuning `acct_auth_underline()`.
-- **Gerak hanya pembukaan.** Kartu dan kolom data naik 16 px sambil memudar
-  (500 ms, `--ease`), sekali saja; dimatikan pada
-  `prefers-reduced-motion: reduce`. Tidak ada tiket terisi, jam berjalan, atau
-  stempel.
+- **Sketsa tangan.** `acct_auth_doodle()` menggambar satu adegan loket
+  340 × 275: tali jemuran berisi kaos, handuk, dan kaus kaki, keranjang cucian,
+  mesin cuci depan, dan gelembung sabun. Alasan: loket laundry memang berisi
+  benda itu, dan gambar tangan membuat halaman terasa dibuat orang, bukan
+  template. Ketebalan garis dibuat bertingkat seperti sketsa asli (badan mesin
+  2 px, kain 1,8 px, kerut dan tenunan 1,25 px), ujung dan sambungan bulat.
+  Tinta `--ink`, dua aksen saja: biru `#53629E` untuk kain dan kuning `#D9A227`
+  untuk gelembung serta tarikan kuas judul. Bidang kain dan badan mesin diisi
+  warna datar sangat muda (`#E3E7F4`, `#EBEEF8`, `#F6F7FC`) setelah garisnya
+  selesai ditarik, seperti mewarnai sketsa. Tanpa gradasi.
+- **Keranjang sebagai penanda isian.** Empat lipatan cucian di keranjang
+  mewakili empat perempat isian wajib; `account.js` menambah `.is-filled` pada
+  lipatan sesuai jumlah kolom yang sudah terisi. Alasan: memberi umpan balik
+  kemajuan tanpa menambah elemen UI baru. Penanda ini `aria-hidden` dan murni
+  hiasan; validasi tetap lewat pesan galat per kolom.
+- **Butir kertas.** `.auth-body::after` menaruh satu lapis `feTurbulence`
+  (opasitas 0,055, `multiply`) supaya kertas, tinta, dan gambar terasa satu
+  bahan. Bukan pola dekoratif, tidak menurunkan kontras di bawah AA (teks
+  sekunder tetap 6,3:1 pada kertas yang paling gelap oleh tekstur).
+- **Gerak.** Garis ditarik sekali lewat `pathLength="1"` +
+  `stroke-dashoffset` (920 ms), warna menyusul 460 ms; kaos, handuk, dan kaus
+  kaki bergoyang ±1,7° dari jepitan (6,4 detik,
+  `cubic-bezier(0.45, 0, 0.55, 1)`, dua fase berbeda); gelembung naik 44 px
+  selama 9 detik; `.auth-drum` berputar bolak balik saat `body.is-washing`
+  (dipasang `account.js` ketika formulir dikirim). Kartu dan kolom data naik
+  16 px sambil memudar (500 ms, `--ease`), sekali saja. Semua gerak hanya pada
+  `transform` dan `opacity`, dan semuanya dimatikan pada
+  `prefers-reduced-motion: reduce` (sketsa langsung tampil utuh). Tidak ada
+  tiket terisi, jam berjalan, atau stempel.
+- **Ikon baris data.** `acct_fact_icon()` memakai gaya garis yang sama, 16 px,
+  supaya ikon tidak terasa dari pustaka lain. Judul diberi satu tarikan kuas
+  `acct_auth_underline()`.
 - **Kerangka sendiri.** `acct_auth_page_start()` / `acct_auth_page_end()`
   memuat `auth.css` saja (bukan `account.css`) supaya dua halaman ini tidak
   saling menimpa gaya dengan `akun.php`.

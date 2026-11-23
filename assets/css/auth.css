@@ -24,6 +24,20 @@
 
 .auth-body main { flex: 1 0 auto; }
 
+/* Butir kertas: satu lapis tekstur halus di atas lembar, supaya gambar tangan
+   dan huruf terasa satu bahan. Bukan pola dekoratif, cuma kehangatan kertas. */
+.auth-body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+}
+
 .auth-wrap {
     width: min(1080px, 100% - 40px);
     margin-inline: auto;
@@ -415,8 +429,8 @@
 .auth-facts { min-width: 0; }
 
 .auth-doodle {
-    max-width: 340px;
-    margin: 0 0 24px;
+    max-width: 380px;
+    margin: 0 0 20px;
     color: var(--ink);
 }
 .auth-doodle svg {
@@ -424,6 +438,25 @@
     width: 100%;
     height: auto;
     overflow: visible;
+    rotate: -0.7deg;
+}
+
+/* Tiap lipatan cucian di keranjang mewakili satu kolom yang sudah terisi.
+   Gerakannya cuma muncul sekali, sebagai tanda kemajuan mengisi formulir. */
+.auth-item {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    opacity: 0;
+    transform: translateY(5px) scale(0.95);
+    transition: opacity 280ms var(--ease), transform 280ms var(--ease);
+}
+.auth-item.is-filled {
+    opacity: 1;
+    transform: none;
+}
+.auth-item > path:first-child {
+    fill: #E3E7F4;
+    fill-opacity: 0.85;
 }
 
 /* Garis sketsa ditarik sekali saat halaman dibuka, bukan berdenyut. */
@@ -459,6 +492,14 @@
 }
 
 @keyframes doodleDraw { to { stroke-dashoffset: 0; } }
+@keyframes doodleFill { to { fill-opacity: 0.85; } }
+
+/* Bidang diwarnai setelah garisnya selesai ditarik, seperti menyelesaikan
+   sketsa: garis dulu, warna kemudian. */
+.auth-doodle [data-draw].auth-fill {
+    animation: doodleDraw 920ms var(--ease) forwards, doodleFill 460ms var(--ease) forwards;
+    animation-delay: var(--d, 0ms), calc(var(--d, 0ms) + 460ms);
+}
 @keyframes doodleSway {
     from { transform: rotate(-1.7deg); }
     to   { transform: rotate(1.7deg); }
@@ -596,6 +637,9 @@
         animation: none;
         stroke-dashoffset: 0;
     }
+    /* Warna sketsa langsung penuh, tidak menunggu animasi. */
+    .auth-doodle [data-draw].auth-fill { fill-opacity: 0.85; }
+    .auth-item { transition: none; }
     .auth-sway,
     .auth-bubble,
     .auth-body.is-washing .auth-drum { animation: none; }

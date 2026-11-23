@@ -100,6 +100,36 @@
         });
     });
 
+    /* ---------------------------------------------- isi keranjang cucian */
+    /* Satu lipatan cucian muncul tiap seperempat isian wajib terisi. Penanda
+       kemajuan ini murni hiasan (aria-hidden), validasi tetap lewat pesan
+       galat di tiap kolom. */
+    document.querySelectorAll('[data-auth-form]').forEach(function (form) {
+        var items = document.querySelectorAll('.auth-item');
+        if (!items.length) {
+            return;
+        }
+        var required = Array.prototype.slice.call(form.querySelectorAll('input[required]'));
+        if (!required.length) {
+            return;
+        }
+
+        function updateLoad() {
+            var done = required.filter(function (input) {
+                return input.value.trim() !== '';
+            }).length;
+            var steps = done === 0 ? 0 : Math.ceil((done / required.length) * items.length);
+            items.forEach(function (item) {
+                item.classList.toggle('is-filled', Number(item.dataset.step) <= steps);
+            });
+        }
+
+        required.forEach(function (input) {
+            input.addEventListener('input', updateLoad);
+        });
+        updateLoad();
+    });
+
     /* ------------------------------------------------- cegah kirim kosong */
     document.querySelectorAll('[data-auth-form]').forEach(function (form) {
         form.addEventListener('submit', function (event) {
